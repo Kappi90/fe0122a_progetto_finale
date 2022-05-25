@@ -1,0 +1,37 @@
+.grid-container {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 10px;
+}
+
+.grid-item {
+  width: 15vw;
+  height: auto;
+  border: 1px solid black;
+}
+
+.grow {
+  cursor: pointer;
+}
+.grow:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+a {
+  cursor: pointer;
+}
+
+.title{
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+.sfondo{
+  width: 100%;
+  background: linear-gradient(45deg, #4158d0, #c850c0);
+}
+
+nav{
+  margin-left: 11%;
+}

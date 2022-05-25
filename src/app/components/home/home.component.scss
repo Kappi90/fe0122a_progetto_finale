@@ -1,0 +1,30 @@
+body {
+  width: 1980px;
+  height: 1080px;
+  margin:0;
+  padding:0;
+  background: linear-gradient(#141e30, #243b55);
+}
+
+.home-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.home-box .card-box {
+  position: relative;
+}
+
+
+
+
+
+

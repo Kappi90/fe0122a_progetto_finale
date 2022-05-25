@@ -1,0 +1,72 @@
+<div class="title bg-dark">
+      <h1 class="text-center text-white my-3">
+        Dettagli fattura n. {{ fattura?.id }}
+      </h1>
+</div>
+<div class="sfondo">
+  <div class="card mx-auto p-2" style="width: 30vw">
+    <div class="card-body">
+      <h5 class="card-title fw-bold fs-3">
+        {{ fattura?.cliente.ragioneSociale }}
+      </h5>
+      <h5 class="card-subtitle mb-2 fs-4 text-muted">
+        {{ fattura?.cliente.nomeContatto }}
+        {{ fattura?.cliente.cognomeContatto }}
+      </h5>
+      <p class="card-text fs-5 mt-3">
+        Importo:<span> {{ fattura?.importo }} €</span>
+      </p>
+      <p class="card-text fs-5">
+        Stato Fattura :
+        <select name="stato" id="stato" class="px-4 rounded ms-3 text-center" (change)="onChange($event)">
+          <option value="{{ fattura?.stato?.id }}" selected>
+            {{ fattura?.stato?.nome }}
+          </option>
+          <option *ngIf="fattura?.stato?.id == 2" value="1">PAGATA</option>
+          <option *ngIf="fattura?.stato?.id == 1" value="2">NON PAGATA</option>
+        </select>
+      </p>
+      <p class="card-text fs-5">ID unico: {{ fattura?.id }}</p>
+      <p class="card-text fs-5 mb-3">
+        Data : {{ fattura?.data | date: 'd/M/yy, h:mm a' }}
+      </p>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <span *ngIf="modificato" class="btn btn-success mx-4 fs-5 px-3" (click)="inviaDati()">Salva</span>
+          <span class="btn btn-danger fs-5 px-3" (click)="openModal(content)">Elimina</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="torna row mt-4">
+  <div class="col d-flex align-items-center ml-2">
+    <span class="btnBack float-right fs-2" [routerLink]="['/fatture']" routerLinkActive="router-link-active"><i
+        class="point bi bi-arrow-left-circle"></i></span><span class="fs-5 ms-2">Torna alla lista fatture</span>
+  </div>
+</div>
+
+<!-- Pop-up elimina fattura  -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      Fattura: {{ fattura?.cliente.ragioneSociale }}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      Importo:<span class="text-success"> {{ fattura?.importo }} €</span>
+    </p>
+    <p>Sei sicuro di voler eliminare questa fattura?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-warning shadow-none" (click)="modal.close('Close click')">
+      Annulla
+    </button>
+    <button type="button" class="btn btn-danger" (click)="elimina()">
+      Elimina fattura
+    </button>
+  </div>
+</ng-template>
+

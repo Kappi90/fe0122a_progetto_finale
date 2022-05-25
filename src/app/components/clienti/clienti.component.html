@@ -1,0 +1,94 @@
+<div class="bg-dark">
+  <h1 class="title text-center text-white">Lista clienti</h1>
+    <button id="addC" class="btn btn-info" [routerLink]="['/creacliente']" routerLinkActive="router-link-active">
+      Nuovo Cliente <i class="bi bi-person-plus-fill"></i>
+    </button>
+</div>
+
+<!-- Tabella con la lista clienti -->
+<div class="limiter">
+  <div class="container-table">
+    <div class="wrap-table">
+      <div class="table">
+        <table>
+          <thead>
+            <tr class="table-head">
+              <th class="column1">ID cliente</th>
+              <th class="column2">Ragione Sociale</th>
+              <th class="column3 text-center">Partita IVA</th>
+              <th class="column4">Email</th>
+              <th class="column4">Dettagli</th>
+              <th class="column4">Modifica</th>
+              <th class="column4">Elimina</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let cliente of clienti; let i = index">
+            <tr>
+              <th scope="row">{{ cliente.id }}</th>
+              <td class="column1">{{ cliente.ragioneSociale }}</td>
+              <td class="column2 text-center">{{ cliente.partitaIva }}</td>
+              <td class="column3">{{ cliente.email }}</td>
+              <td class="column4">
+                <button class="btn btn-success my-1" [routerLink]="['/dettaglicliente/', cliente.id]"
+                  routerLinkActive="active">
+                  Dettagli cliente
+                </button>
+              </td>
+              <td  class="column4">
+                <button class="btn btn-warning my-1" [routerLink]="['/modificacliente', cliente.id]"
+                  routerLinkActive="active">
+                  Modifica
+                </button>
+              </td>
+              <td  class="column4">
+                <button class="btn btn-danger my-1" (click)="open(mymodal)">
+                  Elimina
+                </button>
+                <ng-template #mymodal let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">
+                      Sei sicuro?
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    Stai per eliminare il cliente
+                    <strong>{{ cliente.ragioneSociale }}</strong> e le sue
+                    fatture. Vuoi procedere?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-info" (click)="modal.close('Save click')">
+                      Indietro
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="eliminaCliente(cliente.id, i); modal.close()">
+                      Si, elimina
+                    </button>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Numerazione pagina -->
+<div class="numPag bg-dark p-2 justify-content-center">
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" *ngIf="!response?.first">
+            <a class="page-link" (click)="cambiaPag(response.number - 1)">&laquo;</a>
+          </li>
+          <li class="page-item" *ngFor="let pag of numP; let p = index"
+            [ngClass]="p == response.number ? 'active' : ''">
+            <a class="page-link" (click)="cambiaPag(p)">{{ p + 1 }}</a>
+          </li>
+          <li class="page-item" *ngIf="!response?.last">
+            <a class="page-link" (click)="cambiaPag(response.number + 1)">&raquo;</a>
+          </li>
+        </ul>
+      </nav>
+
+</div>

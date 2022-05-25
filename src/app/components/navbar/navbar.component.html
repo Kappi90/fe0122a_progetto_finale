@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <h4 class="m-3">CRM | Epicode</h4>
+    <button (click)="isCollapse = !isCollapse" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isCollapse" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link text-center text-dark" aria-current="page" [routerLink]="['/']" routerLinkActive="active" *ngIf="!isLoggedUser()">Home</a>
+        <a class="nav-link text-center text-dark" [routerLink]="['/login']" routerLinkActive="active" *ngIf="!isLoggedUser()">Login</a>
+        <a class="nav-link text-center text-dark" [routerLink]="['/signup']" routerLinkActive="active" *ngIf="!isLoggedUser()">Signup</a>
+        <a class="nav-link text-center text-dark" [routerLink]="['/lista-utenti']" routerLinkActive="router-link-active" *ngIf="isLoggedUser()">Utenti</a>
+        <a class="nav-link text-center text-dark" [routerLink]="['/clienti']" routerLinkActive="router-link-active" *ngIf="isLoggedUser()">Clienti</a>
+        <a class="nav-link text-center text-dark" [routerLink]="['/fatture']" routerLinkActive="router-link-active" *ngIf="isLoggedUser()">Fatture</a>
+        <button class="logout" (click)="Logout()"  *ngIf="isLoggedUser()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
